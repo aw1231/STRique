@@ -42,7 +42,7 @@ MAINTAINER Pay Giesselmann <giesselmann@molgen.mpg.de>
 RUN apt-get --yes update && \
     apt-get install -y --no-install-recommends wget locales \
     git gcc g++ make cmake python3-dev python3-pip \
-    ca-certificates apt-transport-https \
+    ca-certificates apt-transport-https zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN update-ca-certificates
