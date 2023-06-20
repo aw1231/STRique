@@ -69,7 +69,7 @@ class fast5Index():
             reads = []
             for group in f5:
                 s = f5[group + "/Raw/"].visit(lambda name: name if 'Signal' in name else None)
-                ID = (str(f5[group + "/Raw/" + s.rpartition('/')[0]].attrs['read_id'], 'utf-8'))
+                ID = (str(f5[group + "/Raw/" + s.rpartition('/')[0]].attrs['read_id']))
                 reads.append((group, ID))
         return reads
 
