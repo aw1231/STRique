@@ -58,8 +58,8 @@ WORKDIR /app
 RUN pip3 install setuptools wheel
 RUN pip3 install -r requirements.txt
 RUN python3 setup.py install
-RUN rm -rf build
-RUN rm -rf submodules/seqan
+# RUN rm -rf build
+# RUN rm -rf submodules/seqan
 
 WORKDIR /app
 # CMD python3 /app/scripts/STRique.py
