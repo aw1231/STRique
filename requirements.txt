@@ -9,7 +9,7 @@ h5py >= 2.7.1
 scikit-image < 0.15.0
 pycparser == 2.21
 cffi == 1.15.0
-pyvbz == 1.0.1
+pyvbz
 #pomegranate == 0.10.0
 git+https://github.com/jmschrei/pomegranate.git@v0.10.0
 submodules/ont_fast5_api
