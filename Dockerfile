@@ -58,6 +58,10 @@ WORKDIR /app
 
 RUN pip3 install setuptools wheel
 RUN pip3 install -r requirements.txt
+RUN wget https://github.com/nanoporetech/vbz_compression/releases/download/1.0.2/pyvbz-1.0.1-cp36-cp36m-linux_x86_64.whl
+RUN pip3 install pyvbz-1.0.1-cp36-cp36m-linux_x86_64.whl
+RUN wget https://github.com/nanoporetech/vbz_compression/releases/download/1.0.2/ont-vbz-hdf-plugin_1.0.2-1.bionic_amd64.deb
+RUN dpkg -i ont-vbz-hdf-plugin_1.0.2-1.bionic_amd64.deb
 RUN python3 setup.py install
 # RUN rm -rf build
 # RUN rm -rf submodules/seqan
