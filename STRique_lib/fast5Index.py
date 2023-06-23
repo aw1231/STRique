@@ -220,6 +220,9 @@ class fast5Index():
     def get_raw(self, ID):
         assert self.index_dict
         if not ID in self.index_dict:
+            # ID format is 53bed018-e87e-5756-888a-90335ed61ab5, check if the 3rd segment starts with '5'
+            if ID.split('-')[2][0] == '5':
+                return None
             raise RuntimeError("[Error] Read {ID} not found in {index}.".format(ID=ID, index=self.index_file))
         target_file = re.split('(\.fast5|\.tar)\/', self.index_dict[ID])
         if len(target_file) == 1:           # single read file
