@@ -62,7 +62,7 @@ class fast5Index():
     def __get_ID_single__(f5_file):
         with h5py.File(f5_file, 'r') as f5:
             s = f5["/Raw/"].visit(lambda name: name if 'Signal' in name else None)
-            return str(f5["/Raw/" + s.rpartition('/')[0]].attrs['read_id'], 'utf-8')
+            return str(f5["/Raw/" + s.rpartition('/')[0]].attrs['read_id'])
 
     def __get_ID_multi__(f5_file):
         with h5py.File(f5_file, 'r') as f5:
