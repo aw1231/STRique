@@ -659,30 +659,42 @@ class repeatDetector(object):
         if len(cols) >= 11:
             try:
                 sr.QNAME = cols[0]
+            except:
+                logger.log("SAM Decoder: QNAME unable to be parsed. cols[0] is {}".format(cols[0]), logger.log_type.Error)
+                return self.sam_record()
+            try:
                 sr.FLAG = int(cols[1])
+            except:
+                logger.log("SAM Decoder: FLAG unable to be parsed to an int. cols[1] is {}".format(cols[1]), logger.log_type.Error)
+                return self.sam_record()
+            try:
                 sr.RNAME = cols[2]
+            except:
+                logger.log("SAM Decoder: RNAME unable to be parsed. cols[2] is {}".format(cols[2]), logger.log_type.Error)
+                return self.sam_record()
+            try:
                 sr.POS = int(cols[3])
+            except:
+                if cols[3] == "0":
+                    sr.POS = 0
+                else:
+                    logger.log("SAM Decoder: POS unable to be parsed to int. cols[3] is \"{}\"".format(cols[3]), logger.log_type.Error)
+                    return self.sam_record()
+            try:
                 cigar_ops = self.__decode_cigar__(cols[5])
                 sr.TLEN = self.__ops_length__(cigar_ops, recOps='MDN=X')
+            except:
+                logger.log("SAM Decoder: TLEN unable to be parsed.", logger.log_type.Error)
+                return self.sam_record()
+            try:
                 sr.CLIP_BEGIN = sum([op[0] for op in cigar_ops[:2] if op[1] in 'SH'])
+            except:
+                logger.log("SAM Decoder: CLIP_BEGIN unable to be parsed.", logger.log_type.Error)
+                return self.sam_record()
+            try:
                 sr.CLIP_END = sum([op[0] for op in cigar_ops[-2:] if op[1] in 'SH'])
             except:
-                if sr.QNAME:
-                    logger.log("SAM Decoder: QNAME is {}".format(sr.QNAME), logger.log_type.Error)
-                if sr.FLAG:
-                    logger.log("SAM Decoder: FLAG is {}".format(sr.FLAG), logger.log_type.Error)
-                if sr.RNAME:
-                    logger.log("SAM Decoder: RNAME is {}".format(sr.RNAME), logger.log_type.Error)
-                if sr.POS:
-                    logger.log("SAM Decoder: POS is {}".format(sr.POS), logger.log_type.Error)
-                else:
-                    logger.log("SAM Decoder: POS can't be converted to int, cols[3] is {}".format(cols[3]), logger.log_type.Error)
-                if sr.TLEN:
-                    logger.log("SAM Decoder: TLEN is {}".format(sr.TLEN), logger.log_type.Error)
-                if sr.CLIP_BEGIN:
-                    logger.log("SAM Decoder: CLIP_BEGIN is {}".format(sr.CLIP_BEGIN), logger.log_type.Error)
-                if sr.CLIP_END:
-                    logger.log("SAM Decoder: CLIP_END is {}".format(sr.CLIP_END), logger.log_type.Error)
+                logger.log("SAM Decoder: CLIP_END unable to be parsed.", logger.log_type.Error)
                 return self.sam_record()
         return sr
 
