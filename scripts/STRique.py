@@ -675,6 +675,8 @@ class repeatDetector(object):
                     logger.log("SAM Decoder: RNAME is {}".format(sr.RNAME), logger.log_type.Error)
                 if sr.POS:
                     logger.log("SAM Decoder: POS is {}".format(sr.POS), logger.log_type.Error)
+                else:
+                    logger.log("SAM Decoder: POS can't be converted to int, cols[3] is {}".format(cols[3]), logger.log_type.Error)
                 if sr.TLEN:
                     logger.log("SAM Decoder: TLEN is {}".format(sr.TLEN), logger.log_type.Error)
                 if sr.CLIP_BEGIN:
