@@ -667,6 +667,20 @@ class repeatDetector(object):
                 sr.CLIP_BEGIN = sum([op[0] for op in cigar_ops[:2] if op[1] in 'SH'])
                 sr.CLIP_END = sum([op[0] for op in cigar_ops[-2:] if op[1] in 'SH'])
             except:
+                if sr.QNAME:
+                    logger.log("SAM Decoder: QNAME is {}".format(sr.QNAME), logger.log_type.Error)
+                if sr.FLAG:
+                    logger.log("SAM Decoder: FLAG is {}".format(sr.FLAG), logger.log_type.Error)
+                if sr.RNAME:
+                    logger.log("SAM Decoder: RNAME is {}".format(sr.RNAME), logger.log_type.Error)
+                if sr.POS:
+                    logger.log("SAM Decoder: POS is {}".format(sr.POS), logger.log_type.Error)
+                if sr.TLEN:
+                    logger.log("SAM Decoder: TLEN is {}".format(sr.TLEN), logger.log_type.Error)
+                if sr.CLIP_BEGIN:
+                    logger.log("SAM Decoder: CLIP_BEGIN is {}".format(sr.CLIP_BEGIN), logger.log_type.Error)
+                if sr.CLIP_END:
+                    logger.log("SAM Decoder: CLIP_END is {}".format(sr.CLIP_END), logger.log_type.Error)
                 return self.sam_record()
         return sr
 
